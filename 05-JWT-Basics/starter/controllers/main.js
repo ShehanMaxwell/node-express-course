@@ -4,13 +4,17 @@
 
 // setup authentication so only the request with JWT can access the dashboard
 
+const CustomAPIError = require('../errors/custom-error');
+
 const login = async (req, res) => {
-const { username, password } = req.body;
-// mongo - option 1
-// joi - option 2
-// check in the controller - option 3
+  const { username, password } = req.body;
+  // mongo - option 1
+  // joi - option 2
+  // check in the controller - option 3
 
-
+  if (!username || !password) {
+    throw new CustomAPIError('Please provide email and password', 400);
+  }
   console.log(username, password);
   res.send('Fake Login/Register/Signup Route');
 };
